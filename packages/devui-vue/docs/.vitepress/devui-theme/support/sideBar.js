@@ -35,7 +35,8 @@ export function getSideBarConfig(sidebar, path) {
  */
 export function getFlatSideBarLinks(sidebar) {
     return sidebar.reduce((links, item) => {
-        if (item.link && !item.hide) {
+        const isDev = import.meta.env.DEV;
+        if (item.link && (isDev || (!isDev && !item.hide))) {
             links.push({ text: item.text, link: removeExtention(item.link) });
         }
         if (isSideBarGroup(item)) {
